@@ -1,0 +1,39 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "sudha",
+      "password": "2000",
+      "phonenumber": "1234567890",
+      "gender": "Female"
+    },
+    {
+      "id": 2,
+      "username": "vedhika",
+      "password": "20000",
+      "phonenumber": "1234567890",
+      "gender": "Female"
+    },
+    {
+      "id": 3,
+      "username": "sasthika",
+      "password": "20000",
+      "phonenumber": "4459127890",
+      "gender": "Female"
+    },
+    {
+      "id": 4,
+      "username": "Muthu",
+      "password": "8906",
+      "phonenumber": "1234327890",
+      "gender": "Female"
+    },
+    {
+      "id": 5,
+      "username": "pavi",
+      "password": "1111",
+      "phonenumber": "6789127890",
+      "gender": "Female"
+    }
+  ]
+}
