@@ -4,7 +4,7 @@ import { createRoot } from 'react-dom/client';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import '@ionic/react/css/core.css';
-import Home from './Home';
+
 
 const container = document.getElementById('root');
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

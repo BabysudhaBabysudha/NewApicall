@@ -1,35 +1,41 @@
 import React ,{useState,useEffect}from 'react';
 import axios from "axios";
-import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar,IonRow,IonCol,IonGrid,IonModal,IonLabel,IonItem,IonInput} from '@ionic/react';
+import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar,IonRow,IonCol,IonGrid,IonModal,IonLabel,IonItem,IonInput,IonSelectOption,IonSelect} from '@ionic/react';
+
 interface UserData {
   id: number;
-  username: string;
-  password: string;
-  
+  name: string;
+  price: string;
 }
 interface users {
   id: number;
-  username: string;
-  password: number;
-  phonenumber:number;
-  gender:string;
+  name: string;
+  price: number;
+  oldprice:number;
+  category:string;
+  isActive:string;
+  description:string;
+ 
 }
 const Home: React.FC = () => {
   const [data, setData] = useState<users[]>([]);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [phonenumber, setPhonenumber] = useState("");
-  const [gender, setGender] = useState("");
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [oldprice, setoldPrice] = useState("");
+  const [category, setCategory] = useState("");
+  const [isActive, setisActive] = useState("");
+  const [description, setDescription] = useState("");
   const [edit, setEdit] = useState(false);
   const [id, setId] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [popupData, setPopupData] = useState<UserData>({
     id: 0,
-    username: '',
-    password: '',
+    name: '',
+    price: '',
+    });
     
-  });
+    
     const fetchData=()=>{
          axios.get("http://localhost:3000/users")
          .then((res)=>{
@@ -54,18 +60,24 @@ const Home: React.FC = () => {
       axios
         .post("http://localhost:3000/users", {
           id,
-          username,
-          password,
-          phonenumber,
-          gender
+          name,
+          price,
+          oldprice,
+          category,
+          isActive,
+          description,
+        
         })
         .then((res) => {
           console.log(res.data);
            setId("")
-          setUsername("");
-          setPassword("");
-          setPhonenumber("");
-          setGender("");
+          setName("");
+          setPrice("");
+          setoldPrice("");
+          setCategory("");
+          setisActive("");
+          setDescription("");
+         
         })
         .catch((err) => {
           console.log(err);
@@ -76,13 +88,16 @@ const Home: React.FC = () => {
     };
     const handleEdit = () => {
       axios
-        .put(`http://localhost:3000/users/${id}`, { id, username, password,phonenumber,gender })
+        .put(`http://localhost:3000/users/${id}`, { id, name, price,oldprice,category,isActive,description })
         .then(() => {
           setId("");
-          setUsername("");
-          setPassword("");
-          setPhonenumber("");
-          setGender("");
+          setName("");
+          setPrice("");
+          setoldPrice("");
+          setCategory("");
+          setisActive("");
+          setDescription("");
+         
         })
         .catch((err) => {
           console.log(err);
@@ -102,12 +117,14 @@ const Home: React.FC = () => {
       })
       .catch((err) => console.log(err));
   };
-    const handleUpdate = (id:string,username:string, password:string,phonenumber:string,gender:string) => {
+    const handleUpdate = (id:string,name:string, price:string,oldprice:string,category:string,isActive:string,description:string) => {
       setId(id);
-      setUsername(username);
-      setPassword(password);
-      setPhonenumber(phonenumber);
-      setGender(gender);
+      setName(name);
+      setPrice(price);
+      setoldPrice(oldprice);
+      setCategory(category);
+      setisActive(isActive);
+      setDescription(description);
       setEdit(true);
      
     };
@@ -124,28 +141,29 @@ const Home: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-
-     <IonGrid className="table">
-       
-       
-    <IonRow style={{border:"1px solid"}}>
+      <IonGrid className="table">
+       <IonRow style={{border:"1px solid"}}>
           <IonCol style={{border:"1px solid"}}>Id</IonCol>
-          <IonCol style={{border:"1px solid"}}>Username</IonCol>
-          <IonCol style={{border:"1px solid"}}>Password</IonCol>
-          <IonCol style={{border:"1px solid"}}>Phonenumber</IonCol>
-          <IonCol style={{border:"1px solid"}}>Gender</IonCol>
+          <IonCol style={{border:"1px solid"}}>name</IonCol>
+          <IonCol style={{border:"1px solid"}}>Price</IonCol>
+          <IonCol style={{border:"1px solid"}}>Oldprice</IonCol>
+          <IonCol style={{border:"1px solid"}}>category</IonCol>
+          <IonCol style={{border:"1px solid"}}>isActive</IonCol>
+          <IonCol style={{border:"1px solid"}}>description</IonCol>
           <IonCol style={{border:"1px solid"}}>Delete</IonCol>
           <IonCol style={{border:"1px solid"}}>Update</IonCol>
-         
-          
-        </IonRow>
-     {data.map((item: any) => (
+         </IonRow>
+     {data.map((item: any,i:any) => (
           <IonRow key={item.id} className='table'>
             <IonCol style={{border:"1px solid"}}>{item.id}</IonCol>
-            <IonCol style={{border:"1px solid"}}>{item.username}</IonCol>
-            <IonCol style={{border:"1px solid"}}>{item.password}</IonCol>
-            <IonCol style={{border:"1px solid"}}>{item.phonenumber}</IonCol>
-            <IonCol style={{border:"1px solid"}}>{item.gender}</IonCol>
+            <IonCol style={{border:"1px solid"}}>{item.name}</IonCol>
+            <IonCol style={{border:"1px solid"}}>{item.price}</IonCol>
+            <IonCol style={{border:"1px solid"}}>{item.oldprice}</IonCol>
+            <IonCol style={{border:"1px solid"}}>{item.category}</IonCol>
+            <IonCol style={{border:"1px solid"}}>
+             {item.isActive === 'true' ? <p>true</p> : <p>False</p>}
+            </IonCol>
+            <IonCol style={{border:"1px solid"}}>{item.description}</IonCol>
             <IonCol style={{border:"1px solid"}}>
              <IonButton  onClick={() => {
                     handleDelete(item.id);
@@ -153,7 +171,7 @@ const Home: React.FC = () => {
                   <IonCol style={{border:"1px solid"}}>
                   <IonButton  style={{color:"red"}} 
                   onClick={() =>
-                    handleUpdate(item.id, item.username, item.password,item.phonenumber,item.gender)
+                    handleUpdate(item.id, item.name, item.price,item.oldprice,item.category,item.isActive,item.description)
                   }
                 >
                   Update
@@ -178,17 +196,17 @@ const Home: React.FC = () => {
               />
             </IonItem>
             <IonItem>
-              <IonLabel position="stacked">Username</IonLabel>
+              <IonLabel position="stacked">name</IonLabel>
               <IonInput
-                value={popupData.username}
-                onIonChange={(e) => setPopupData({ ...popupData, username: e.detail.value! })}
+                value={popupData.name}
+                onIonChange={(e) => setPopupData({ ...popupData, name: e.detail.value! })}
               />
             </IonItem>
             <IonItem>
-              <IonLabel position="stacked">Password</IonLabel>
+              <IonLabel position="stacked">Price</IonLabel>
               <IonInput
-                value={popupData.password}
-                onIonChange={(e) => setPopupData({ ...popupData, password: e.detail.value! })}
+                value={popupData.price}
+                onIonChange={(e) => setPopupData({ ...popupData, price: e.detail.value! })}
               />
             </IonItem>
             <IonButton onClick={handlePopupUpdate}>
@@ -206,29 +224,41 @@ const Home: React.FC = () => {
       />
       <input style={{padding:"10px",marginLeft:"50px"}}
         type="text"
-        placeholder="username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
+        placeholder="name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
       />
       <input style={{padding:"10px",marginLeft:"70px",marginTop:"30px"}}
         type="text"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Price"
+        value={price}
+        onChange={(e) => setPrice(e.target.value)}
       />
       <input style={{padding:"10px",marginLeft:"70px",marginTop:"30px"}}
         type="text"
-        placeholder="Phonenumber"
-        value={phonenumber}
-        onChange={(e) => setPhonenumber(e.target.value)}
+        placeholder="oldprice"
+        value={oldprice}
+        onChange={(e) => setoldPrice(e.target.value)}
       />
       <input style={{padding:"10px",marginLeft:"70px",marginTop:"30px"}}
         type="text"
-        placeholder="gender"
-        value={gender}
-        onChange={(e) => setGender(e.target.value)}
+        placeholder="category"
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
       />
-        {edit ? (
+       <input style={{padding:"10px",marginLeft:"70px",marginTop:"30px"}}
+        type="text"
+        placeholder="isActive"
+        value={isActive}
+        onChange={(e) => setisActive(e.target.value)}
+      />
+      <input style={{padding:"10px",marginLeft:"70px",marginTop:"30px"}}
+        type="text"
+        placeholder="description"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      />
+      {edit ? (
         <IonButton onClick={handleEdit}>update</IonButton>
       ) : (
         <IonButton type="submit" onClick={handleClick} style={{marginLeft:"70px"}}> 
@@ -237,30 +267,11 @@ const Home: React.FC = () => {
       )}
      
      </IonContent>
-   
+    
      </IonPage>
      );
 };
-
 export default Home;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -1,39 +1,38 @@
 {
   "users": [
     {
-      "id": 1,
-      "username": "sudha",
-      "password": "2000",
-      "phonenumber":"1234567890",
-      "gender":"Female"
+      "id": "1",
+      "name": "product 1",
+      "price": "12.34",
+      "oldprice": "15.66",
+      "category": "vegetable",
+      "isActive": "true",
+      "description": "Lorem ipsum dolor sit amet",
+      "categories": [
+        "Vegetables",
+        "Fruits & Nuts",
+        "Dairy & Creams",
+        "Packages Food",
+        "Staples"
+      ]
     },
     {
-      "username": "vedhika",
-      "password": "12345",
-      "id": 2,
-      "phonenumber":"6789127890",
-      "gender":"Female"
+      "id": "2",
+      "name": "product2",
+      "price": "23",
+      "oldprice": "30",
+      "category": "fruits",
+      "isActive": "false",
+      "description": "Lorem ipsum dolor sit amet"
     },
     {
-      "id": 3,
-      "username": "sasthika",
-      "password": "20000",
-      "phonenumber":"4459127890",
-      "gender":"Female"
-    },
-    {
-      "id": 4,
-      "username": "Muthu",
-      "password": "8906",
-      "phonenumber":"1234327890",
-      "gender":"Female"
-    },
-    {
-      "username": "pavi",
-      "password": "1111",
-      "id": 5,
-      "phonenumber":"6789127890",
-      "gender":"Female"
+      "id": "3",
+      "name": "product3",
+      "price": "24",
+      "oldprice": "12",
+      "category": "fish",
+      "isActive": "true",
+      "description": "Lorem ipsum dolor sit amet"
     }
-    ]
+  ]
 }
